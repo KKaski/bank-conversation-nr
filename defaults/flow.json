@@ -1,0 +1,221 @@
+"flow": [
+    {
+      "id": "dc1aed7f.4aa33",
+      "type": "tab",
+      "label": "Watson Virtual Agent"
+    },
+    {
+      "id": "237d8e00.dd0342",
+      "type": "tab",
+      "label": "Conversation"
+    },
+    {
+      "id": "e5a26881.531f7",
+      "type": "http in",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "url": "/proxy/v1/workspaces/fe2f5f83-3537-4be3-b56b-e418a8ed53c2/message",
+      "method": "post",
+      "swaggerDoc": "",
+      "x": 295,
+      "y": 153,
+      "wires": [
+        [
+          "9e85fef2.666a9"
+        ]
+      ]
+    },
+    {
+      "id": "44c022a2.051374",
+      "type": "http response",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "x": 543.5,
+      "y": 236,
+      "wires": []
+    },
+    {
+      "id": "f5d550d5.4240e",
+      "type": "watson-conversation-v1",
+      "z": "dc1aed7f.4aa33",
+      "name": "Conversation",
+      "workspaceid": "fe2f5f83-3537-4be3-b56b-e418a8ed53c2",
+      "multiuser": false,
+      "context": true,
+      "x": 318.5,
+      "y": 236,
+      "wires": [
+        [
+          "44c022a2.051374"
+        ]
+      ]
+    },
+    {
+      "id": "9e85fef2.666a9",
+      "type": "function",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "func": "msg.payload=msg.payload.input.text;\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 117.5,
+      "y": 234,
+      "wires": [
+        [
+          "f5d550d5.4240e"
+        ]
+      ]
+    },
+    {
+      "id": "67098500.30ba94",
+      "type": "http in",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "url": "/bot2",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 90.5,
+      "y": 395,
+      "wires": [
+        [
+          "72f9100e.85d7b8"
+        ]
+      ]
+    },
+    {
+      "id": "72f9100e.85d7b8",
+      "type": "template",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "field": "payload",
+      "fieldType": "msg",
+      "format": "handlebars",
+      "syntax": "mustache",
+      "template": "<html>\n<head>\n<title>IBM Watson Virtual Agent Chat Widget Sample</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\" />\n<style>\n  html, body, iframe { width: 100%; height:100%; padding:0; margin:0; }\n  #ibm_chat_root { position:fixed; bottom:0; right: 20px; height: 80%; min-height:400px; width:300px; background:#000; }\n</style>\n</head>\n<body>\n<div id=\"ibm_chat_root\"></div>\n<iframe style=\"width:100%; height:100%\" src=\"https://conversation-nr.mybluemix.net/proxy\"></iframe>\n<!--\nhttps://unpkg.com/@watson-virtual-agent/chat-widget@X.X.X/dist/chat.min.js for a specific version, where X.X.X is the semantic version of the chat widget.\nIn your production environment, we recommend locking down your widget version.\n-->\n<script src='https://unpkg.com/@watson-virtual-agent/chat-widget/dist/chat.min.js'></script>\n<script>\n  var config = {\n    el: 'ibm_chat_root',\n    baseURL: 'https://api.ibm.com/virtualagent/run/api/v1',\n    botID: '0ae1934d-3af5-4849-8e09-f5ca14df9035',\n    XIBMClientID: 'f99cce03-746a-4c97-976d-cf915f81d791',\n    XIBMClientSecret: 'Y1iM7hQ7bD5fU3eN3yF3sI1hE2jY1aS7rW5jE5tX0wJ0eQ7rT5'\n  };\n  window.IBMChat.init(config);\n</script>\n</body>\n</html>",
+      "x": 333.5,
+      "y": 400,
+      "wires": [
+        [
+          "c129b3ae.7f29f8"
+        ]
+      ]
+    },
+    {
+      "id": "c129b3ae.7f29f8",
+      "type": "http response",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "x": 597.5,
+      "y": 398,
+      "wires": []
+    },
+    {
+      "id": "8bc9d044.dcd5f8",
+      "type": "http in",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "url": "/proxy",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 84.5,
+      "y": 539,
+      "wires": [
+        [
+          "164b236c.052edd"
+        ]
+      ]
+    },
+    {
+      "id": "56076db1.69dd54",
+      "type": "http response",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "x": 648.5,
+      "y": 537,
+      "wires": []
+    },
+    {
+      "id": "e02bcd1b.ac6db",
+      "type": "debug",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "active": false,
+      "console": "false",
+      "complete": "false",
+      "x": 535.5,
+      "y": 625,
+      "wires": []
+    },
+    {
+      "id": "164b236c.052edd",
+      "type": "http request",
+      "z": "dc1aed7f.4aa33",
+      "name": "",
+      "method": "GET",
+      "ret": "txt",
+      "url": "https://www.nordea.fi/",
+      "tls": "",
+      "x": 325.5,
+      "y": 540,
+      "wires": [
+        [
+          "e02bcd1b.ac6db",
+          "56076db1.69dd54"
+        ]
+      ]
+    },
+    {
+      "id": "621149c7.f173e8",
+      "type": "watson-conversation-v1",
+      "z": "237d8e00.dd0342",
+      "name": "Nordea",
+      "workspaceid": "97a827d3-378b-452c-aa50-73435fee8993",
+      "multiuser": true,
+      "context": true,
+      "x": 418,
+      "y": 162,
+      "wires": [
+        [
+          "fd939542.d1b8c"
+        ]
+      ]
+    },
+    {
+      "id": "dc9da3f6.d4768",
+      "type": "http in",
+      "z": "237d8e00.dd0342",
+      "name": "",
+      "url": "/conversation-proxy",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 171.5,
+      "y": 239.25,
+      "wires": [
+        [
+          "621149c7.f173e8",
+          "f23ad98.65cdf28"
+        ]
+      ]
+    },
+    {
+      "id": "fd939542.d1b8c",
+      "type": "http response",
+      "z": "237d8e00.dd0342",
+      "name": "",
+      "x": 628.5,
+      "y": 248.5,
+      "wires": []
+    },
+    {
+      "id": "f23ad98.65cdf28",
+      "type": "debug",
+      "z": "237d8e00.dd0342",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "false",
+      "x": 424.5,
+      "y": 306.5,
+      "wires": []
+    }
+  ]

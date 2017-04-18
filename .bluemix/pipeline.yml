@@ -1,0 +1,40 @@
+---
+stages:
+- name: build
+  inputs:
+  - url: https://github.com/KKaski/bank-conversation-nr.git
+    type: git
+    branch: master
+    dir_name: null
+  triggers:
+  - type: commit
+  jobs:
+  - name: Build
+    type: builder
+    artifact_dir: ''
+- name: deploy
+  inputs:
+  - type: job
+    stage: build
+    job: Build
+    dir_name: null
+  triggers:
+  - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ibm:yp:us-south
+      organization: kimmo.kaskikallio@fi.ibm.com
+      space: NordeaDemo
+      application: bank-conversation-nr-dev
+    script: "#!/bin/bash\ncf create-service cloudantNoSQLDB Lite bank-conversation-nr-cloudantNoSQLDB\
+      \ \ncf create-service conversation free bank-conversation-demo\ncf create-service\
+      \ speech_to_text standard \"Speech to Text-bot\"\ncf create-service text_to_speech\
+      \ standard \"Text to Speech-bot\" \n\ncf push \"${CF_APP}\" -n \"${CF_APP}\"\
+      \n"
+hooks:
+- enabled: true
+  label: null
+  ssl_enabled: false
+  url: https://devops-api.ng.bluemix.net/v1/messaging/webhook/publish
