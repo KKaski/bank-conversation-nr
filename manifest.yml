@@ -1,13 +1,13 @@
 declared-services: 
-      bank-conversation-nr-cloudantNoSQLDB: 
-        label: cloudantNoSQLDB 
-        plan: Lite 
+    bank-conversation-nr-cloudantNoSQLDB: 
+        label: cloudantNoSQLDB
+        plan: Lite
     bank-conversation-demo: 
-        label: conversation 
-        plan: free 
+        label: conversation
+        plan: free
     Speech to Text-bot: 
-        label: speech_to_text 
-        plan: standard 
+        label: speech_to_text
+        plan: standard
     Text to Speech-bot: 
         label: text_to_speech 
         plan: standard 
