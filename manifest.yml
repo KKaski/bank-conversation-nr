@@ -21,6 +21,6 @@ applications:
   disk_quota: 1024M
   services:
   - bank-conversation-demo
-  - \"${CF_APP}\"-cloudantNoSQLDB
+  - bank-conversation-nr.cloudantNoSQLDB
   - Speech to Text-bot
   - Text to Speech-bot
