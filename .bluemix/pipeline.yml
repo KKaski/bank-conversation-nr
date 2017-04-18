@@ -28,11 +28,12 @@ stages:
       organization: kimmo.kaskikallio@fi.ibm.com
       space: NordeaDemo
       application: bank-conversation-nr-dev
-    script: "#!/bin/bash\ncf create-service cloudantNoSQLDB Lite bank-conversation-nr-cloudantNoSQLDB\
+    script: "#!/bin/bash\ncf create-service cloudantNoSQLDB Lite \"${CF_APP}\".cloudantNoSQLDB\
       \ \ncf create-service conversation free bank-conversation-demo\ncf create-service\
       \ speech_to_text standard \"Speech to Text-bot\"\ncf create-service text_to_speech\
-      \ standard \"Text to Speech-bot\" \n\ncf push \"${CF_APP}\" -n \"${CF_APP}\"\
-      \n"
+      \ standard \"Text to Speech-bot\" \ncf create-user-provided-service proxy -p\
+      \ {\"host\":\"https://\"${CF_APP}\".mybluemix.net\"}\n\ncf push \"${CF_APP}\"\
+      \ -n \"${CF_APP}\"\n"
 hooks:
 - enabled: true
   label: null
