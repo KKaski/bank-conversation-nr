@@ -1,18 +1,18 @@
-"flow": [
+[
     {
-      "id": "dc1aed7f.4aa33",
+      "id": "2c9e479.3b22b38",
       "type": "tab",
       "label": "Watson Virtual Agent"
     },
     {
-      "id": "237d8e00.dd0342",
+      "id": "ae084b34.7e2e48",
       "type": "tab",
       "label": "Conversation"
     },
     {
-      "id": "e5a26881.531f7",
+      "id": "70449913.82b7e",
       "type": "http in",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "url": "/proxy/v1/workspaces/fe2f5f83-3537-4be3-b56b-e418a8ed53c2/message",
       "method": "post",
@@ -21,23 +21,23 @@
       "y": 153,
       "wires": [
         [
-          "9e85fef2.666a9"
+          "a44227d6.f83148"
         ]
       ]
     },
     {
-      "id": "44c022a2.051374",
+      "id": "68e18fab.0ccb78",
       "type": "http response",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "x": 543.5,
       "y": 236,
       "wires": []
     },
     {
-      "id": "f5d550d5.4240e",
+      "id": "a09d7090.9d44e8",
       "type": "watson-conversation-v1",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "Conversation",
       "workspaceid": "fe2f5f83-3537-4be3-b56b-e418a8ed53c2",
       "multiuser": false,
@@ -46,14 +46,14 @@
       "y": 236,
       "wires": [
         [
-          "44c022a2.051374"
+          "68e18fab.0ccb78"
         ]
       ]
     },
     {
-      "id": "9e85fef2.666a9",
+      "id": "a44227d6.f83148",
       "type": "function",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "func": "msg.payload=msg.payload.input.text;\nreturn msg;",
       "outputs": 1,
@@ -62,14 +62,14 @@
       "y": 234,
       "wires": [
         [
-          "f5d550d5.4240e"
+          "a09d7090.9d44e8"
         ]
       ]
     },
     {
-      "id": "67098500.30ba94",
+      "id": "bcb1adca.5e326",
       "type": "http in",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "url": "/bot2",
       "method": "get",
@@ -78,41 +78,41 @@
       "y": 395,
       "wires": [
         [
-          "72f9100e.85d7b8"
+          "4739afd6.d6922"
         ]
       ]
     },
     {
-      "id": "72f9100e.85d7b8",
+      "id": "4739afd6.d6922",
       "type": "template",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "field": "payload",
       "fieldType": "msg",
       "format": "handlebars",
       "syntax": "mustache",
-      "template": "<html>\n<head>\n<title>IBM Watson Virtual Agent Chat Widget Sample</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\" />\n<style>\n  html, body, iframe { width: 100%; height:100%; padding:0; margin:0; }\n  #ibm_chat_root { position:fixed; bottom:0; right: 20px; height: 80%; min-height:400px; width:300px; background:#000; }\n</style>\n</head>\n<body>\n<div id=\"ibm_chat_root\"></div>\n<iframe style=\"width:100%; height:100%\" src=\"https://conversation-nr.mybluemix.net/proxy\"></iframe>\n<!--\nhttps://unpkg.com/@watson-virtual-agent/chat-widget@X.X.X/dist/chat.min.js for a specific version, where X.X.X is the semantic version of the chat widget.\nIn your production environment, we recommend locking down your widget version.\n-->\n<script src='https://unpkg.com/@watson-virtual-agent/chat-widget/dist/chat.min.js'></script>\n<script>\n  var config = {\n    el: 'ibm_chat_root',\n    baseURL: 'https://api.ibm.com/virtualagent/run/api/v1',\n    botID: '0ae1934d-3af5-4849-8e09-f5ca14df9035',\n    XIBMClientID: 'f99cce03-746a-4c97-976d-cf915f81d791',\n    XIBMClientSecret: 'Y1iM7hQ7bD5fU3eN3yF3sI1hE2jY1aS7rW5jE5tX0wJ0eQ7rT5'\n  };\n  window.IBMChat.init(config);\n</script>\n</body>\n</html>",
+      "template": "<html>\n<head>\n<title>IBM Watson Virtual Agent Chat Widget Sample</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\" />\n<style>\n  html, body, iframe { width: 100%; height:100%; padding:0; margin:0; }\n  #ibm_chat_root { position:fixed; bottom:0; right: 20px; height: 80%; min-height:400px; width:300px; background:#000; }\n</style>\n</head>\n<body>\n<div id=\"ibm_chat_root\"></div>\n<iframe style=\"width:100%; height:100%\" src=\"https://bank-conversation-nr.mybluemix.net/proxy\"></iframe>\n<!--\nhttps://unpkg.com/@watson-virtual-agent/chat-widget@X.X.X/dist/chat.min.js for a specific version, where X.X.X is the semantic version of the chat widget.\nIn your production environment, we recommend locking down your widget version.\n-->\n<script src='https://unpkg.com/@watson-virtual-agent/chat-widget/dist/chat.min.js'></script>\n<script>\n  var config = {\n    el: 'ibm_chat_root',\n    baseURL: 'https://api.ibm.com/virtualagent/run/api/v1',\n    botID: '0ae1934d-3af5-4849-8e09-f5ca14df9035',\n    XIBMClientID: 'f99cce03-746a-4c97-976d-cf915f81d791',\n    XIBMClientSecret: 'Y1iM7hQ7bD5fU3eN3yF3sI1hE2jY1aS7rW5jE5tX0wJ0eQ7rT5'\n  };\n  window.IBMChat.init(config);\n</script>\n</body>\n</html>",
       "x": 333.5,
       "y": 400,
       "wires": [
         [
-          "c129b3ae.7f29f8"
+          "af605f10.f204d"
         ]
       ]
     },
     {
-      "id": "c129b3ae.7f29f8",
+      "id": "af605f10.f204d",
       "type": "http response",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "x": 597.5,
       "y": 398,
       "wires": []
     },
     {
-      "id": "8bc9d044.dcd5f8",
+      "id": "508793cf.0d568c",
       "type": "http in",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "url": "/proxy",
       "method": "get",
@@ -121,23 +121,23 @@
       "y": 539,
       "wires": [
         [
-          "164b236c.052edd"
+          "27611fbd.7f8d5"
         ]
       ]
     },
     {
-      "id": "56076db1.69dd54",
+      "id": "18c51fb6.6e936",
       "type": "http response",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "x": 648.5,
       "y": 537,
       "wires": []
     },
     {
-      "id": "e02bcd1b.ac6db",
+      "id": "a41a901c.0ec9c",
       "type": "debug",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "active": false,
       "console": "false",
@@ -147,75 +147,197 @@
       "wires": []
     },
     {
-      "id": "164b236c.052edd",
+      "id": "27611fbd.7f8d5",
       "type": "http request",
-      "z": "dc1aed7f.4aa33",
+      "z": "2c9e479.3b22b38",
       "name": "",
       "method": "GET",
       "ret": "txt",
-      "url": "https://www.nordea.fi/",
+      "url": "http://tulli.fi/en/private-persons/faq/faq-ordering-goods-online",
       "tls": "",
       "x": 325.5,
       "y": 540,
       "wires": [
         [
-          "e02bcd1b.ac6db",
-          "56076db1.69dd54"
+          "a41a901c.0ec9c",
+          "18c51fb6.6e936"
         ]
       ]
     },
     {
-      "id": "621149c7.f173e8",
+      "id": "4fbf38cd.ec9ec8",
       "type": "watson-conversation-v1",
-      "z": "237d8e00.dd0342",
+      "z": "ae084b34.7e2e48",
       "name": "Nordea",
       "workspaceid": "97a827d3-378b-452c-aa50-73435fee8993",
-      "multiuser": true,
-      "context": true,
-      "x": 418,
-      "y": 162,
+      "multiuser": false,
+      "context": false,
+      "x": 160,
+      "y": 257,
       "wires": [
         [
-          "fd939542.d1b8c"
+          "cd5d06a3.398f28",
+          "5f32b7e0.661d28",
+          "a9f29400.a8886"
         ]
       ]
     },
     {
-      "id": "dc9da3f6.d4768",
+      "id": "88782d4a.290c8",
       "type": "http in",
-      "z": "237d8e00.dd0342",
+      "z": "ae084b34.7e2e48",
       "name": "",
       "url": "/conversation-proxy",
-      "method": "get",
+      "method": "post",
       "swaggerDoc": "",
-      "x": 171.5,
-      "y": 239.25,
+      "x": 178.5,
+      "y": 87.25,
       "wires": [
         [
-          "621149c7.f173e8",
-          "f23ad98.65cdf28"
+          "9dd01e71.13364",
+          "56e875c5.792784"
         ]
       ]
     },
     {
-      "id": "fd939542.d1b8c",
+      "id": "c3671b74.3d4558",
       "type": "http response",
-      "z": "237d8e00.dd0342",
+      "z": "ae084b34.7e2e48",
       "name": "",
-      "x": 628.5,
-      "y": 248.5,
+      "x": 362.4999694824219,
+      "y": 643.5000305175781,
       "wires": []
     },
     {
-      "id": "f23ad98.65cdf28",
+      "id": "9dd01e71.13364",
       "type": "debug",
-      "z": "237d8e00.dd0342",
+      "z": "ae084b34.7e2e48",
       "name": "",
       "active": true,
       "console": "false",
-      "complete": "false",
-      "x": 424.5,
-      "y": 306.5,
+      "complete": "true",
+      "x": 380.5,
+      "y": 42,
+      "wires": []
+    },
+    {
+      "id": "cd5d06a3.398f28",
+      "type": "debug",
+      "z": "ae084b34.7e2e48",
+      "name": "",
+      "active": false,
+      "console": "false",
+      "complete": "true",
+      "x": 387.4999694824219,
+      "y": 216.5,
+      "wires": []
+    },
+    {
+      "id": "56e875c5.792784",
+      "type": "function",
+      "z": "ae084b34.7e2e48",
+      "name": "",
+      "func": "msg.params={\"context\":msg.payload.context};\nif (typeof msg.payload.input != 'undefined')\n    msg.payload=msg.payload.input.text;\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 161.5,
+      "y": 179.75,
+      "wires": [
+        [
+          "4fbf38cd.ec9ec8"
+        ]
+      ]
+    },
+    {
+      "id": "5f32b7e0.661d28",
+      "type": "cloudant out",
+      "z": "ae084b34.7e2e48",
+      "name": "conversations",
+      "cloudant": "",
+      "database": "conversations",
+      "service": "bank-conversation-nr-cloudantNoSQLDB",
+      "payonly": true,
+      "operation": "insert",
+      "x": 417.4999694824219,
+      "y": 256.25,
+      "wires": []
+    },
+    {
+      "id": "a9f29400.a8886",
+      "type": "switch",
+      "z": "ae084b34.7e2e48",
+      "name": "Callout before return",
+      "property": "payload.context.step",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "cont",
+          "v": "calculate",
+          "vt": "str"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "false",
+      "outputs": 2,
+      "x": 172.49996948242188,
+      "y": 459.75,
+      "wires": [
+        [
+          "5c099200.a8f8cc"
+        ],
+        [
+          "c3671b74.3d4558"
+        ]
+      ]
+    },
+    {
+      "id": "612af745.6bd25",
+      "type": "http response",
+      "z": "ae084b34.7e2e48",
+      "name": "",
+      "x": 577.5,
+      "y": 456.5,
+      "wires": []
+    },
+    {
+      "id": "c92e86.f289f978",
+      "type": "debug",
+      "z": "ae084b34.7e2e48",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "true",
+      "x": 579.5,
+      "y": 412.5,
+      "wires": []
+    },
+    {
+      "id": "5c099200.a8f8cc",
+      "type": "function",
+      "z": "ae084b34.7e2e48",
+      "name": "",
+      "func": "flow.set('msg',msg);\n\nvar request = global.get('request');\n\nurl = \"https://www.nordea.fi/wemapp/api/flexicreditcalculator/calculateflexicredit/\";\nurl+=\"loanamount/\"+msg.payload.context.amount;\nurl+=\"/payment/0/\";\nurl+=\"amortisationperiod/\"+msg.payload.context.duration;\n\n//This is for the proxy call instead of SDK\nconst options = {  \n  method: 'GET',\n  uri: url\n};\n\nnode.warn(url);\n\n //Call the proxy in node-red\nrequest(options)  \n  .then(function (response) {\n    node.warn(\"2\");\n    var msg = flow.get('msg');\n    msg.payload.context.step=\"\";\n    c = JSON.parse(response);\n    msg.payload.output.text.push(\"Loan:\"+c.loanamount);\n    msg.payload.output.text.push(\"Duration:\"+c.amortisationperiod);\n    msg.payload.output.text.push(\"Payment:\"+c.payment);\n    msg.payload.output.text.push(\"Interest rate:\"+c.pros);\n    msg.payload.output.text.push(\"Fee:\"+c.hoitoMaksu);\n    node.send(msg);\n  })\n  .catch(function (err) {\n    node.warn(\"2\");\n    var msg = flow.get('msg');\n    msg.payload.output.text.push(\"Error in calcluation try again later\");\n    msg.payload.output.text.push(\"\"+err);\n    node.send(msg);\n  })\n",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 379.9999694824219,
+      "y": 453,
+      "wires": [
+        [
+          "c92e86.f289f978",
+          "612af745.6bd25"
+        ]
+      ]
+    },
+    {
+      "id": "166b32ef.1a4605",
+      "type": "comment",
+      "z": "ae084b34.7e2e48",
+      "name": "Post processing",
+      "info": "",
+      "x": 164.23333740234375,
+      "y": 380.1666564941406,
       "wires": []
     }
   ]
