@@ -22,7 +22,7 @@ applications:
   env:
     NODE_RED_USERNAME: user
     NODE_RED_PASSWORD: password
-    FB_TOKEN:test
+    FB_TOKEN: test
   services:
   - bank-conversation-demo
   - bank-conversation-nr.cloudantNoSQLDB
