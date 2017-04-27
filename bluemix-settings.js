@@ -50,8 +50,8 @@ var settings = module.exports = {
     httpStatic: path.join(__dirname,"public"),
 
     functionGlobalContext: {"request":require('request-promise'),
-                            process: process },According to this use case, which of the following groups are IBM's main competitors in this space?
-
+                            process: process },
+                            
     storageModule: require("./couchstorage")
 }
 
