@@ -19,6 +19,10 @@ applications:
   name: bank-conversation-nr
   host: bank-conversation-nr
   disk_quota: 1024M
+  env:
+    NODE_RED_USERNAME: user
+    NODE_RED_PASSWORD: password
+    FB_TOKEN:test
   services:
   - bank-conversation-demo
   - bank-conversation-nr.cloudantNoSQLDB
