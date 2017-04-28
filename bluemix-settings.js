@@ -51,7 +51,7 @@ var settings = module.exports = {
 
     functionGlobalContext: {"request":require('request-promise'),
                             process: process },
-                            
+                             
     storageModule: require("./couchstorage")
 }
 
