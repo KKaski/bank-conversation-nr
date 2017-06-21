@@ -1,4 +1,7 @@
-[
+{
+  "_id": "bank-conversation-nr/flow",
+  "_rev": "75-f51852cee439f5a499f611946bbade69",
+  "flow": [
     {
       "id": "2c9e479.3b22b38",
       "type": "tab",
@@ -8,6 +11,47 @@
       "id": "ae084b34.7e2e48",
       "type": "tab",
       "label": "Conversation"
+    },
+    {
+      "id": "ec1a6db9.b17f",
+      "type": "tab",
+      "label": "Facebook"
+    },
+    {
+      "id": "2f1a8cd6.9d11ac",
+      "type": "subflow",
+      "name": "PostProcessing",
+      "info": "",
+      "in": [
+        {
+          "x": 48,
+          "y": 129,
+          "wires": [
+            {
+              "id": "af38a091.965f48"
+            },
+            {
+              "id": "441a92d4.df6ba4"
+            }
+          ]
+        }
+      ],
+      "out": [
+        {
+          "x": 644,
+          "y": 310,
+          "wires": [
+            {
+              "id": "177c8351.8bda0d",
+              "port": 0
+            },
+            {
+              "id": "af38a091.965f48",
+              "port": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "70449913.82b7e",
@@ -39,7 +83,7 @@
       "type": "watson-conversation-v1",
       "z": "2c9e479.3b22b38",
       "name": "Conversation",
-      "workspaceid": "fe2f5f83-3537-4be3-b56b-e418a8ed53c2",
+      "workspaceid": "e1c3b4e7-b9b6-42ca-ad64-df7700185e5b",
       "multiuser": false,
       "context": true,
       "x": 318.5,
@@ -165,11 +209,395 @@
       ]
     },
     {
+      "id": "73be1cc1.f806fc",
+      "type": "http in",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "url": "/fb-hook",
+      "method": "get",
+      "swaggerDoc": "",
+      "x": 127.5,
+      "y": 241,
+      "wires": [
+        [
+          "2270d521.ddbe1a",
+          "7548259e.e8c28c"
+        ]
+      ]
+    },
+    {
+      "id": "7dcaac5b.9732b4",
+      "type": "debug",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "false",
+      "x": 483.5,
+      "y": 155,
+      "wires": []
+    },
+    {
+      "id": "2270d521.ddbe1a",
+      "type": "function",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "func": "//Check the challenge\nif(msg.payload[\"hub.verify_token\"]===\"fbstuffcommingfromfacebook123\")\n    msg.payload=msg.payload[\"hub.challenge\"];\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 309.5,
+      "y": 241,
+      "wires": [
+        [
+          "7dcaac5b.9732b4",
+          "1daf4fc9.d9ffd"
+        ]
+      ]
+    },
+    {
+      "id": "1daf4fc9.d9ffd",
+      "type": "http response",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "x": 583.5,
+      "y": 245,
+      "wires": []
+    },
+    {
+      "id": "7548259e.e8c28c",
+      "type": "debug",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "false",
+      "x": 268.5,
+      "y": 154,
+      "wires": []
+    },
+    {
+      "id": "54236caf.823684",
+      "type": "comment",
+      "z": "ec1a6db9.b17f",
+      "name": "Verify the challenge from facebook to activate hook",
+      "info": "",
+      "x": 247.5,
+      "y": 88,
+      "wires": []
+    },
+    {
+      "id": "d21814c3.e709f",
+      "type": "http in",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "url": "/fb-hook",
+      "method": "post",
+      "swaggerDoc": "",
+      "x": 133.5,
+      "y": 423,
+      "wires": [
+        [
+          "6a02c522.4faa3c",
+          "918afea5.1451f8",
+          "cba799a4.743ae"
+        ]
+      ]
+    },
+    {
+      "id": "6a02c522.4faa3c",
+      "type": "debug",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "true",
+      "x": 328.5,
+      "y": 371,
+      "wires": []
+    },
+    {
+      "id": "918afea5.1451f8",
+      "type": "http response",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "x": 328.5,
+      "y": 424,
+      "wires": []
+    },
+    {
+      "id": "37b298ff.55c7a8",
+      "type": "http request",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "method": "POST",
+      "ret": "txt",
+      "url": "",
+      "tls": "",
+      "x": 814.5,
+      "y": 640,
+      "wires": [
+        [
+          "1a94181d.b186e"
+        ]
+      ]
+    },
+    {
+      "id": "81f88d33.b0cc3",
+      "type": "function",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "func": "//If the message cam from our self do nothing\n//if(msg.payload.entry[0].messaging[0].sender.id===\"1922690594667221\")\n//    return null;\n    \nvar url=\"https://graph.facebook.com/v2.6/me/messages?access_token=\";\n\nvar process = global.get('process');\nvar token = process.env.FB_TOKEN;\nmsg.url=url+token;\n\n//Lets iterate through all the text\nmessagetext =\"\";\n\nmsg.payload.output.text.forEach(function(text) {\n    messagetext+=text +\"\\n\"\n});\n\nif(typeof msg.payload.output.link != 'undefined')\n    messagetext+=msg.payload.output.link;\n\nmsg.payload = {\n  \"recipient\": {\n    \"id\": msg.fb.entry[0].messaging[0].sender.id\n  },\n  \"message\": {\n    \"text\": messagetext\n  }\n  };\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 602.5,
+      "y": 635,
+      "wires": [
+        [
+          "37b298ff.55c7a8",
+          "fa09b2.c3d4165"
+        ]
+      ]
+    },
+    {
+      "id": "489f6a46.383edc",
+      "type": "watson-conversation-v1",
+      "z": "ec1a6db9.b17f",
+      "name": "Facebook",
+      "workspaceid": "e1c3b4e7-b9b6-42ca-ad64-df7700185e5b",
+      "multiuser": true,
+      "context": true,
+      "x": 326.5,
+      "y": 527,
+      "wires": [
+        [
+          "9ce1ac96.b695",
+          "5ef985b2.930e8c"
+        ]
+      ]
+    },
+    {
+      "id": "cba799a4.743ae",
+      "type": "function",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "func": "\nmsg.fb=msg.payload;\nmsg.user=   msg.payload.entry[0].messaging[0].sender.id;\nmsg.payload=msg.payload.entry[0].messaging[0].message.text;\n\n\n//EN e1c3b4e7-b9b6-42ca-ad64-df7700185e5b\n//SE 49a89fc9-94aa-485b-8fba-c2680e4556d0\n//FI 23110706-7778-467e-a8a8-9df9022269e5\n\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 177.5,
+      "y": 527,
+      "wires": [
+        [
+          "489f6a46.383edc"
+        ]
+      ]
+    },
+    {
+      "id": "9ce1ac96.b695",
+      "type": "debug",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "true",
+      "x": 478.5,
+      "y": 478,
+      "wires": []
+    },
+    {
+      "id": "fa09b2.c3d4165",
+      "type": "debug",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "false",
+      "x": 816.5,
+      "y": 570,
+      "wires": []
+    },
+    {
+      "id": "4d4a1f.df3645e",
+      "type": "inject",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "x": 160.5,
+      "y": 789,
+      "wires": [
+        [
+          "79aa9af4.b3654c"
+        ]
+      ]
+    },
+    {
+      "id": "79aa9af4.b3654c",
+      "type": "function",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "func": "var url=\"https://graph.facebook.com/v2.6/me/messages?access_token=\";\nvar process = global.get('process');\nvar token = process.env.FB_TOKEN;\n\nmsg.url=url+token;\nmsg.payload = {\n  \"recipient\": {\n    \"id\": \"1674820249202541\"\n  },\n  \"message\": {\n    \"text\": \"Test Message\"\n  }\n  };\n\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 351.5,
+      "y": 790,
+      "wires": [
+        [
+          "3b2088a5.aed5a8",
+          "eb7790ad.66537"
+        ]
+      ]
+    },
+    {
+      "id": "3b2088a5.aed5a8",
+      "type": "http request",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "method": "POST",
+      "ret": "txt",
+      "url": "",
+      "tls": "",
+      "x": 526.5,
+      "y": 791,
+      "wires": [
+        [
+          "f125a6f7.e9fbb"
+        ]
+      ]
+    },
+    {
+      "id": "f125a6f7.e9fbb",
+      "type": "debug",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "true",
+      "x": 695.5,
+      "y": 790,
+      "wires": []
+    },
+    {
+      "id": "eb7790ad.66537",
+      "type": "debug",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "false",
+      "x": 529.5,
+      "y": 752,
+      "wires": []
+    },
+    {
+      "id": "e395c5ba.3f70d8",
+      "type": "comment",
+      "z": "ec1a6db9.b17f",
+      "name": "Testmessage",
+      "info": "",
+      "x": 146.5,
+      "y": 701,
+      "wires": []
+    },
+    {
+      "id": "7a3bef48.51de",
+      "type": "comment",
+      "z": "ec1a6db9.b17f",
+      "name": "Process message",
+      "info": "",
+      "x": 143.5,
+      "y": 326.75,
+      "wires": []
+    },
+    {
+      "id": "441a92d4.df6ba4",
+      "type": "cloudant out",
+      "z": "2f1a8cd6.9d11ac",
+      "name": "conversations",
+      "cloudant": "",
+      "database": "conversations",
+      "service": "bank-conversation-nr.cloudantNoSQLDB",
+      "payonly": true,
+      "operation": "insert",
+      "x": 275,
+      "y": 127,
+      "wires": []
+    },
+    {
+      "id": "af38a091.965f48",
+      "type": "switch",
+      "z": "2f1a8cd6.9d11ac",
+      "name": "Callout before return",
+      "property": "payload.context.step",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "cont",
+          "v": "calculate",
+          "vt": "str"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "false",
+      "outputs": 2,
+      "x": 290,
+      "y": 203.5,
+      "wires": [
+        [
+          "177c8351.8bda0d"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "177c8351.8bda0d",
+      "type": "function",
+      "z": "2f1a8cd6.9d11ac",
+      "name": "",
+      "func": "flow.set('msg',msg);\nif(!msg.count)\n    msg.count=1;\n    \nvar request = global.get('request');\n\nurl = \"https://www.nordea.fi/wemapp/api/flexicreditcalculator/calculateflexicredit/\";\nurl+=\"loanamount/\"+msg.payload.context.amount;\nurl+=\"/payment/0/\";\nurl+=\"amortisationperiod/\"+msg.payload.context.duration;\n\n//This is for the proxy call instead of SDK\nconst options = {  \n  method: 'GET',\n  uri: url\n};\n\nnode.warn(url);\n\n //Call the proxy in node-red\nrequest(options)  \n  .then(function (response) {\n    node.warn(\"2\");\n    var msg = flow.get('msg');\n    //msg.payload.context.step=\"\";\n    c = JSON.parse(response);\n    msg.payload.output.text.push(\"Loan:\"+c.loanamount);\n    msg.payload.output.text.push(\"Duration:\"+c.amortisationperiod);\n    msg.payload.output.text.push(\"Payment:\"+parseFloat(c.payment).toFixed(1));\n    msg.payload.output.text.push(\"Interest rate:\"+c.pros);\n    msg.payload.output.text.push(\"Fee:\"+c.hoitoMaksu);\n    node.send([msg,null]);\n  })\n  .catch(function (err) {\n    node.warn(\"3\");\n    var msg = flow.get('msg');\n    \n    if(msg.count<2)\n    {\n        msg.count=2;\n        node.send([null,msg]);\n    }\n    else\n    {\n        msg.payload.output.text.push(\"Error in calcluation try again later\");\n        msg.payload.output.text.push(\"\"+err);\n        node.send([msg,null]);\n    }\n  })\n",
+      "outputs": "2",
+      "noerr": 0,
+      "x": 534.5,
+      "y": 124.75,
+      "wires": [
+        [],
+        [
+          "c6501603.bbd52"
+        ]
+      ]
+    },
+    {
+      "id": "c92e86.f289f978",
+      "type": "debug",
+      "z": "ae084b34.7e2e48",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "true",
+      "x": 604.5,
+      "y": 384.5,
+      "wires": []
+    },
+    {
+      "id": "612af745.6bd25",
+      "type": "http response",
+      "z": "ae084b34.7e2e48",
+      "name": "",
+      "x": 605.5,
+      "y": 439.5,
+      "wires": []
+    },
+    {
       "id": "4fbf38cd.ec9ec8",
       "type": "watson-conversation-v1",
       "z": "ae084b34.7e2e48",
       "name": "Nordea",
-      "workspaceid": "97a827d3-378b-452c-aa50-73435fee8993",
+      "workspaceid": "e1c3b4e7-b9b6-42ca-ad64-df7700185e5b",
       "multiuser": false,
       "context": false,
       "x": 160,
@@ -177,48 +605,9 @@
       "wires": [
         [
           "cd5d06a3.398f28",
-          "5f32b7e0.661d28",
-          "a9f29400.a8886"
+          "eb02b5cf.e6218"
         ]
       ]
-    },
-    {
-      "id": "88782d4a.290c8",
-      "type": "http in",
-      "z": "ae084b34.7e2e48",
-      "name": "",
-      "url": "/conversation-proxy",
-      "method": "post",
-      "swaggerDoc": "",
-      "x": 178.5,
-      "y": 87.25,
-      "wires": [
-        [
-          "9dd01e71.13364",
-          "56e875c5.792784"
-        ]
-      ]
-    },
-    {
-      "id": "c3671b74.3d4558",
-      "type": "http response",
-      "z": "ae084b34.7e2e48",
-      "name": "",
-      "x": 362.4999694824219,
-      "y": 643.5000305175781,
-      "wires": []
-    },
-    {
-      "id": "9dd01e71.13364",
-      "type": "debug",
-      "z": "ae084b34.7e2e48",
-      "name": "",
-      "active": true,
-      "console": "false",
-      "complete": "true",
-      "x": 380.5,
-      "y": 42,
-      "wires": []
     },
     {
       "id": "cd5d06a3.398f28",
@@ -236,93 +625,67 @@
       "id": "56e875c5.792784",
       "type": "function",
       "z": "ae084b34.7e2e48",
-      "name": "",
-      "func": "msg.params={\"context\":msg.payload.context};\nif (typeof msg.payload.input != 'undefined')\n    msg.payload=msg.payload.input.text;\nreturn msg;",
+      "name": "PreProcessing",
+      "func": "//EN e1c3b4e7-b9b6-42ca-ad64-df7700185e5b\n//SE 49a89fc9-94aa-485b-8fba-c2680e4556d0\n//FI 23110706-7778-467e-a8a8-9df9022269e5\n\n//Set the language based on the default input paraameter\nif(msg.payload.input.lang===\"SE\")\n    msg.params={workspace_id:\"49a89fc9-94aa-485b-8fba-c2680e4556d0\"};\nelse if(msg.payload.input.lang===\"FI\")\n    msg.params={workspace_id:\"23110706-7778-467e-a8a8-9df9022269e5\"};\nelse\n    msg.params={workspace_id:\"e1c3b4e7-b9b6-42ca-ad64-df7700185e5b\"};\n\nif(typeof msg.payload.context != 'undefined')\n{\n    msg.params.context=msg.payload.context;\n    \n    //Users might want to override the language inside the conversation\n    if(msg.payload.context.language===\"SE\")\n        msg.params.workspace_id=\"49a89fc9-94aa-485b-8fba-c2680e4556d0\";\n    if(msg.payload.context.language===\"FI\")\n        msg.params.workspace_id=\"23110706-7778-467e-a8a8-9df9022269e5\";\n\n    \n    if (typeof msg.payload.input != 'undefined')\n            msg.payload=msg.payload.input.text;\n}\nelse\n{\n   msg.payload=\"Hi\";\n}\n\nreturn msg;",
       "outputs": 1,
       "noerr": 0,
-      "x": 161.5,
+      "x": 191.5,
       "y": 179.75,
       "wires": [
         [
-          "4fbf38cd.ec9ec8"
+          "4fbf38cd.ec9ec8",
+          "6eeecbd3.595b6c"
         ]
       ]
     },
     {
-      "id": "5f32b7e0.661d28",
-      "type": "cloudant out",
-      "z": "ae084b34.7e2e48",
-      "name": "conversations",
-      "cloudant": "",
-      "database": "conversations",
-      "service": "bank-conversation-nr-cloudantNoSQLDB",
-      "payonly": true,
-      "operation": "insert",
-      "x": 417.4999694824219,
-      "y": 256.25,
-      "wires": []
-    },
-    {
-      "id": "a9f29400.a8886",
-      "type": "switch",
-      "z": "ae084b34.7e2e48",
-      "name": "Callout before return",
-      "property": "payload.context.step",
-      "propertyType": "msg",
-      "rules": [
-        {
-          "t": "cont",
-          "v": "calculate",
-          "vt": "str"
-        },
-        {
-          "t": "else"
-        }
-      ],
-      "checkall": "false",
-      "outputs": 2,
-      "x": 172.49996948242188,
-      "y": 459.75,
-      "wires": [
-        [
-          "5c099200.a8f8cc"
-        ],
-        [
-          "c3671b74.3d4558"
-        ]
-      ]
-    },
-    {
-      "id": "612af745.6bd25",
-      "type": "http response",
+      "id": "88782d4a.290c8",
+      "type": "http in",
       "z": "ae084b34.7e2e48",
       "name": "",
-      "x": 577.5,
-      "y": 456.5,
+      "url": "/conversation-proxy",
+      "method": "post",
+      "swaggerDoc": "",
+      "x": 178.5,
+      "y": 87.25,
+      "wires": [
+        [
+          "56e875c5.792784",
+          "9dd01e71.13364"
+        ]
+      ]
+    },
+    {
+      "id": "6eeecbd3.595b6c",
+      "type": "debug",
+      "z": "ae084b34.7e2e48",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "false",
+      "x": 411.5,
+      "y": 172.5,
       "wires": []
     },
     {
-      "id": "c92e86.f289f978",
+      "id": "9dd01e71.13364",
       "type": "debug",
       "z": "ae084b34.7e2e48",
       "name": "",
       "active": true,
       "console": "false",
       "complete": "true",
-      "x": 579.5,
-      "y": 412.5,
+      "x": 380.5,
+      "y": 42,
       "wires": []
     },
     {
-      "id": "5c099200.a8f8cc",
-      "type": "function",
+      "id": "eb02b5cf.e6218",
+      "type": "subflow:2f1a8cd6.9d11ac",
       "z": "ae084b34.7e2e48",
       "name": "",
-      "func": "flow.set('msg',msg);\n\nvar request = global.get('request');\n\nurl = \"https://www.nordea.fi/wemapp/api/flexicreditcalculator/calculateflexicredit/\";\nurl+=\"loanamount/\"+msg.payload.context.amount;\nurl+=\"/payment/0/\";\nurl+=\"amortisationperiod/\"+msg.payload.context.duration;\n\n//This is for the proxy call instead of SDK\nconst options = {  \n  method: 'GET',\n  uri: url\n};\n\nnode.warn(url);\n\n //Call the proxy in node-red\nrequest(options)  \n  .then(function (response) {\n    node.warn(\"2\");\n    var msg = flow.get('msg');\n    msg.payload.context.step=\"\";\n    c = JSON.parse(response);\n    msg.payload.output.text.push(\"Loan:\"+c.loanamount);\n    msg.payload.output.text.push(\"Duration:\"+c.amortisationperiod);\n    msg.payload.output.text.push(\"Payment:\"+c.payment);\n    msg.payload.output.text.push(\"Interest rate:\"+c.pros);\n    msg.payload.output.text.push(\"Fee:\"+c.hoitoMaksu);\n    node.send(msg);\n  })\n  .catch(function (err) {\n    node.warn(\"2\");\n    var msg = flow.get('msg');\n    msg.payload.output.text.push(\"Error in calcluation try again later\");\n    msg.payload.output.text.push(\"\"+err);\n    node.send(msg);\n  })\n",
-      "outputs": 1,
-      "noerr": 0,
-      "x": 379.9999694824219,
-      "y": 453,
+      "x": 335.5,
+      "y": 378.25,
       "wires": [
         [
           "c92e86.f289f978",
@@ -331,13 +694,52 @@
       ]
     },
     {
-      "id": "166b32ef.1a4605",
-      "type": "comment",
-      "z": "ae084b34.7e2e48",
-      "name": "Post processing",
-      "info": "",
-      "x": 164.23333740234375,
-      "y": 380.1666564941406,
+      "id": "5ef985b2.930e8c",
+      "type": "subflow:2f1a8cd6.9d11ac",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "x": 374.5,
+      "y": 632.25,
+      "wires": [
+        [
+          "81f88d33.b0cc3"
+        ]
+      ]
+    },
+    {
+      "id": "1a94181d.b186e",
+      "type": "debug",
+      "z": "ec1a6db9.b17f",
+      "name": "",
+      "active": true,
+      "console": "false",
+      "complete": "false",
+      "x": 1005,
+      "y": 637.7777777777777,
       "wires": []
+    },
+    {
+      "id": "c6501603.bbd52",
+      "type": "delay",
+      "z": "2f1a8cd6.9d11ac",
+      "name": "",
+      "pauseType": "delay",
+      "timeout": "1",
+      "timeoutUnits": "seconds",
+      "rate": "1",
+      "nbRateUnits": "1",
+      "rateUnits": "second",
+      "randomFirst": "1",
+      "randomLast": "5",
+      "randomUnits": "seconds",
+      "drop": false,
+      "x": 519.5,
+      "y": 34,
+      "wires": [
+        [
+          "177c8351.8bda0d"
+        ]
+      ]
     }
   ]
+}
