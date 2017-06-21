@@ -5,12 +5,7 @@ declared-services:
     bank-conversation-demo: 
         label: conversation
         plan: free
-    Speech to Text-bot: 
-        label: speech_to_text
-        plan: standard
-    Text to Speech-bot: 
-        label: text_to_speech 
-        plan: standard 
+
 applications:
 - path: .
   memory: 384M
@@ -26,5 +21,4 @@ applications:
   services:
   - bank-conversation-demo
   - bank-conversation-nr.cloudantNoSQLDB
-  - Speech to Text-bot
-  - Text to Speech-bot
+
